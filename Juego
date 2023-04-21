@@ -1,0 +1,423 @@
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.GridLayout;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Stack;
+
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class RompeNum {
+
+	private JFrame frame;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					RompeNum window = new RompeNum();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	int aleatorios[] = new int [15];
+	public JButton btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btn11,btn12,btn13,btn14,btn15,btn16;
+	public JLabel mov;
+	public int contador = 0;
+
+	public RompeNum() {
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 425, 444);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.decode("#10A477"));
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(4, 4, 0, 0));
+		
+		JPanel marco = new JPanel();
+		marco.setBackground(Color.decode("#10A477"));
+		frame.getContentPane().add(marco, BorderLayout.NORTH);
+		
+		mov = new JLabel("Movimientos: " + contador);
+		mov.setFont(new Font("Comic Sans MS",Font.BOLD,18));
+		mov.setForeground(Color.white);
+		marco.add(mov);
+		
+		JPanel marco2 = new JPanel();//abajo
+		marco2.setBackground(Color.decode("#10A477"));
+		frame.getContentPane().add(marco2, BorderLayout.SOUTH);
+		
+		JPanel marco3 = new JPanel();
+		marco3.setBackground(Color.decode("#10A477"));
+		frame.getContentPane().add(marco3, BorderLayout.WEST);
+		
+		JLabel lblNewLabel_2 = new JLabel("               ");
+		marco3.add(lblNewLabel_2);
+		
+		JPanel marco4 = new JPanel();
+		marco4.setBackground(Color.decode("#10A477"));
+		frame.getContentPane().add(marco4, BorderLayout.EAST);
+		
+		JLabel lblNewLabel_3 = new JLabel("               ");
+		marco4.add(lblNewLabel_3);
+		
+		Numeros();
+		
+		
+		btn1 = new JButton();
+		btn1.setText(String.valueOf(aleatorios[0]));
+		btn1.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn1.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn1);
+		
+		
+		btn2 = new JButton();
+		btn2.setText(String.valueOf(aleatorios[1]));
+		btn2.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn2.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn2);
+		
+		btn3 = new JButton();
+		btn3.setText(String.valueOf(aleatorios[2]));
+		btn3.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn3.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn3);
+		
+		btn4 = new JButton();
+		btn4.setText(String.valueOf(aleatorios[3]));
+		btn4.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn4.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn4);
+		
+		btn5 = new JButton();
+		btn5.setText(String.valueOf(aleatorios[4]));
+		btn5.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn5.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn5);
+		
+		btn6 = new JButton();
+		btn6.setText(String.valueOf(aleatorios[5]));
+		btn6.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn6.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn6);
+		
+		btn7 = new JButton();
+		btn7.setText(String.valueOf(aleatorios[6]));
+		btn7.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn7.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn7);
+		
+		btn8 = new JButton();
+		btn8.setText(String.valueOf(aleatorios[7]));
+		btn8.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn8.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn8);
+		
+		btn9 = new JButton();
+		btn9.setText(String.valueOf(aleatorios[8]));
+		btn9.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn9.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn9);
+		
+		btn10 = new JButton();
+		btn10.setText(String.valueOf(aleatorios[9]));
+		btn10.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn10.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn10);
+		
+		btn11 = new JButton();
+		btn11.setText(String.valueOf(aleatorios[10]));
+		btn11.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn11.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn11);
+		
+		btn12 = new JButton();
+		btn12.setText(String.valueOf(aleatorios[11]));
+		btn12.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn12.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn12);
+		
+		btn13 = new JButton();
+		btn13.setText(String.valueOf(aleatorios[12]));
+		btn13.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn13.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn13);
+		
+		btn14 = new JButton();
+		btn14.setText(String.valueOf(aleatorios[13]));
+		btn14.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn14.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn14);
+		
+		btn15 = new JButton();
+		btn15.setText(String.valueOf(aleatorios[14]));
+		btn15.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn15.setBackground(Color.decode("#00FFE0"));
+		panel.add(btn15);
+		
+		btn16 = new JButton();
+		btn16.setFont(new Font("Matura MT Script Capitals",Font.BOLD,32));
+		btn16.setBackground(Color.decode("#00FFE0"));
+		btn16.setText("");
+		panel.add(btn16);
+		
+		//ESQUINAS
+		btn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn1,btn2,btn5,mov);
+			}
+		});
+		
+		btn4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn4,btn3,btn8,mov);
+			}
+		});
+		
+		btn13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn13,btn9,btn14,mov);
+			}
+		});
+		
+		btn16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn16,btn12,btn15,mov);
+			}
+		});
+		
+		//CENTRO
+		
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn2,btn1,btn3,btn6,mov);
+			}
+		});
+		
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn3,btn2,btn4,btn7,mov);
+			}
+		});
+		
+		btn5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn5,btn1,btn6,btn9,mov);
+			}
+		});
+		
+		btn9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn9,btn5,btn10,btn13,mov);
+			}
+		});
+		
+		btn8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn8,btn4,btn7,btn12,mov);
+			}
+		});
+		
+		btn12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn12,btn8,btn11,btn16,mov);
+			}
+		});
+		
+		btn14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn14,btn13,btn10,btn15,mov);
+			}
+		});
+		
+		btn15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn15,btn14,btn11,btn16,mov);
+			}
+		});
+		
+		//CENTRO CENTR0
+		
+		btn6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn6,btn5,btn2,btn7,btn10,mov);
+			}
+		});
+		
+		btn7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn7,btn6,btn3,btn8,btn11,mov);
+			}
+		});
+		
+		btn10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn10,btn9,btn6,btn11,btn14,mov);
+			}
+		});
+		
+		btn11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checar(btn11,btn10,btn7,btn12,btn15,mov);
+			}
+		});
+		
+		
+		
+		
+		
+		JButton reiniciar = new JButton("Reiniciar");
+		reiniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				reinicio();
+			}
+
+
+		});
+		marco2.add(reiniciar);
+		
+		
+	}
+	
+	public void Numeros() {
+		Stack <Integer> Numeros = new Stack<Integer> ();
+		Random rand = new Random();
+		int aleatorio;
+		
+		for(int i = 0; i < aleatorios.length; i++) {
+			aleatorio = (int)(rand.nextDouble() * 15 + 1);
+			while(Numeros.contains(aleatorio)) {
+				aleatorio = (int)(rand.nextDouble() * 15 + 1);
+			}
+			Numeros.push(aleatorio);
+			aleatorios[i] = aleatorio;
+		}
+	}
+	
+	public void checar(JButton B1,JButton B2,JButton B3,JLabel mov) {
+		if(B1.getText() != "") {
+			if(B2.getText() == "") {
+				B2.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+			}else if(B3.getText() == "") {
+				B3.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+
+			}
+			verificar();
+		}
+	}
+	
+	public void checar(JButton B1,JButton B2,JButton B3,JButton B4,JLabel mov) {
+		if(B1.getText() != "") {
+			if(B2.getText() == "") {
+				B2.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+			}else if(B3.getText() == "") {
+				B3.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+
+			}else if(B4.getText() == "") {
+				B4.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+
+			}
+			verificar();
+		}
+	}
+	
+	public void checar(JButton B1,JButton B2,JButton B3,JButton B4, JButton B5,JLabel mov) {
+		if(B1.getText() != "") {
+			if(B2.getText() == "") {
+				B2.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+			}else if(B3.getText() == "") {
+				B3.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+
+			}else if(B4.getText() == "") {
+				B4.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+
+			}else if(B5.getText() == "") {
+				B5.setText(B1.getText());
+				B1.setText("");
+				contador++;
+				mov.setText("Movimientos: " + contador);
+			}
+			verificar();
+		}
+	}
+	
+	public void verificar() {
+		if(btn1.getText().equals("1") && btn2.getText().equals("2") && btn3.getText().equals("3") && btn4.getText().equals("4") &&
+				btn5.getText().equals("5") && btn6.getText().equals("6") && btn7.getText().equals("7") && btn8.getText().equals("8") &&
+					btn9.getText().equals("9") && btn10.getText().equals("10") && btn11.getText().equals("11") && btn12.getText().equals("12") &&
+						btn13.getText().equals("13") && btn14.getText().equals("14") && btn15.getText().equals("15") && btn16.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "FELICIDADES HAS GANADO !!!");
+			reinicio();
+		}
+		
+		
+	}
+	
+	public void reinicio() {
+		Numeros();
+		btn1.setText(String.valueOf(aleatorios[0]));
+		btn2.setText(String.valueOf(aleatorios[1]));
+		btn3.setText(String.valueOf(aleatorios[2]));
+		btn4.setText(String.valueOf(aleatorios[3]));
+		btn5.setText(String.valueOf(aleatorios[4]));
+		btn6.setText(String.valueOf(aleatorios[5]));
+		btn7.setText(String.valueOf(aleatorios[6]));
+		btn8.setText(String.valueOf(aleatorios[7]));
+		btn9.setText(String.valueOf(aleatorios[8]));
+		btn10.setText(String.valueOf(aleatorios[9]));
+		btn11.setText(String.valueOf(aleatorios[10]));
+		btn12.setText(String.valueOf(aleatorios[11]));
+		btn13.setText(String.valueOf(aleatorios[12]));
+		btn14.setText(String.valueOf(aleatorios[13]));
+		btn15.setText(String.valueOf(aleatorios[14]));
+		btn16.setText("");
+		contador=0;
+		mov.setText("Movimientos: " + contador);
+	}
+}
