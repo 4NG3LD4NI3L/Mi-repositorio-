@@ -1,0 +1,597 @@
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+
+public class Act19 extends JPanel{
+
+	private JFrame frame;
+	public int super_x=0;
+	public int super_y=85;
+	public int direccion = 0;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Act19 window = new Act19();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	
+	public Act19() {
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 557, 585);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBackground(Color.red);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.decode("#0032FF"));
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		JButton reiniciar = new JButton("R E I N I C I A R");
+		panel.add(reiniciar);
+		
+		JPanel juego = new JPanel();
+		juego.setBackground(Color.decode("#009EFF"));
+		frame.getContentPane().add(juego, BorderLayout.CENTER);
+		
+		frame.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				direccion = e.getKeyCode();
+				
+					//ARRIBA
+					if(direccion == 87 && super_y > 0) {
+						super_y -= 10;
+					}
+					//ABAJO
+					if(direccion == 83 && super_y < 480) {
+						super_y += 10;
+					}
+					//DERECHA
+					if(direccion == 68 && super_x < 490) {
+						super_x += 10;
+					}
+					//IZQUIERDA
+					if(direccion == 65 && super_x > 0) {
+						super_x -= 10;
+						
+					}
+					
+					if(jugador.colision(fin2) != false) {
+						JOptionPane.showMessageDialog(null,"Felicidades ganaste");
+						super_x=0;
+						super_y=85;
+					}
+					juego.repaint();
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+			}
+			
+		});
+		
+		frame.setFocusable(true);
+		frame.requestFocus();
+		juego.add(new MyGraphics());
+	}
+	
+	
+	Rect jugador,p,p1,p1_1,p2,p2_2,p3,
+		linea,linea2,linea3,linea4,linea5,linea6,fin,fin2;
+	 
+	 
+	public class MyGraphics extends JComponent{
+		private static final long serialVersionUID = 1L;
+		
+		MyGraphics(){
+			setPreferredSize(new Dimension(505,505));
+		}
+		
+		public void paint(Graphics g) {
+			super.paint(g);
+			
+			//FONDO
+			g.setColor(new Color(255,255,255));
+			g.fillRect(0, 0, 500, 500);
+			
+			//JUAGADOR
+			jugador = new Rect(super_x, super_y, 11, 11,Color.red);
+			
+			g.setColor(jugador.c);
+			g.fillRect(jugador.x,jugador.y,jugador.w,jugador.h);
+			
+			//BORDES
+			//			  x  y  A  L
+			p = new Rect(0,0,500,4,Color.black);//BORDE ARRIBA
+			g.setColor(p.c);
+			g.fillRect(p.x,p.y,p.w,p.h);
+			
+			p1 = new Rect(496,0,4,395,Color.black);//BORDE DERECHO ARRIBA
+			g.setColor(p1.c);
+			g.fillRect(p1.x,p1.y,p1.w,p1.h);
+			
+			p1_1 = new Rect(496,426,4,74,Color.black);//BORDE DERECHO ABAJO
+			g.setColor(p1_1.c);
+			g.fillRect(p1_1.x,p1_1.y,p1_1.w,p1_1.h);
+			
+			p2 = new Rect(0,0,4,75,Color.black);//BORDE IZQUIERDO ARRIBA
+			g.setColor(p2.c);
+			g.fillRect(p2.x,p2.y,p2.w,p2.h);
+			
+			p2_2 = new Rect(0,104,4,396,Color.black);//BORDE IZQUIERDO ABAJO
+			g.setColor(p2_2.c);
+			g.fillRect(p2_2.x,p2_2.y,p2_2.w,p2_2.h);
+			
+			p3 = new Rect(0,496,500,4,Color.black);//BORDE ABAJO
+			g.setColor(p3.c);
+			g.fillRect(p3.x,p3.y,p3.w,p3.h);
+			
+			//INTERIOR
+			
+			////////////////////////////////////
+			///////////////////////////////////
+			//////////////////////////////////VERTICALES
+			
+			linea2 = new Rect(34,34,6,40,Color.black);
+			g.setColor(linea2.c);
+			g.fillRect(linea2.x,linea2.y,linea2.w,linea2.h);
+			
+			
+			linea4 = new Rect(140,3,6,71,Color.black);
+			g.setColor(linea4.c);
+			g.fillRect(linea4.x,linea4.y,linea4.w,linea4.h);
+			
+			linea6 = new Rect(104,73,6,37,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);//////////1
+			
+			
+			linea2 = new Rect(69,104,6,113,Color.black);
+			g.setColor(linea2.c);
+			g.fillRect(linea2.x,linea2.y,linea2.w,linea2.h);
+			
+			linea3 = new Rect(34,105,6,219,Color.black);
+			g.setColor(linea3.c);
+			g.fillRect(linea3.x,linea3.y,linea3.w,linea3.h);
+			
+			
+			linea6 = new Rect(106,141,6,146,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);///////////2
+			
+			linea3 = new Rect(34,354,6,41,Color.black);
+			g.setColor(linea3.c);
+			g.fillRect(linea3.x,linea3.y,linea3.w,linea3.h);
+			
+			linea5 = new Rect(34,426,6,40,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			
+			linea = new Rect(69,358,6,71,Color.black);//
+			g.setColor(linea.c);
+			g.fillRect(linea.x,linea.y,linea.w,linea.h);
+			
+			linea2 = new Rect(105,390,6,76,Color.black);
+			g.setColor(linea2.c);
+			g.fillRect(linea2.x,linea2.y,linea2.w,linea2.h);
+			
+			
+			
+			linea4 = new Rect(176,390,6,41,Color.black);
+			g.setColor(linea4.c);
+			g.fillRect(linea4.x,linea4.y,linea4.w,linea4.h);
+			
+			linea5 = new Rect(140,426,6,41,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			
+			linea = new Rect(176,461,6,36,Color.black);//
+			g.setColor(linea.c);
+			g.fillRect(linea.x,linea.y,linea.w,linea.h);
+			
+			linea2 = new Rect(140,140,6,219,Color.black);
+			g.setColor(linea2.c);
+			g.fillRect(linea2.x,linea2.y,linea2.w,linea2.h);
+			
+			linea4 = new Rect(176,390,6,41,Color.black);
+			g.setColor(linea4.c);
+			g.fillRect(linea4.x,linea4.y,linea4.w,linea4.h);
+			
+			linea5 = new Rect(140,426,6,41,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(69,247,6,77,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(176,33,6,77,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(247,69,6,41,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(211,105,6,38,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(318,108,6,37,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(282,69,6,41,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(247,2,6,36,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(390,2,6,36,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(425,73,6,72,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(460,34,6,39,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea5 = new Rect(318,34,6,39,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea6 = new Rect(390,176,6,76,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(354,140,6,42,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(318,176,6,148,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(247,176,6,41,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(212,212,6,76,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(176,176,6,148,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(247,283,6,76,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+
+			linea6 = new Rect(283,252,6,36,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(283,144,6,72,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(354,212,6,111,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(390,283,6,183,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(390,176,6,76,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(461,105,6,183,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(425,212,6,77,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(426,319,6,111,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(461,319,6,76,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(461,429,6,37,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(283,357,6,110,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(247,390,6,76,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(211,354,6,41,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+
+			
+			
+			
+			
+			////////////////////////////////////
+			///////////////////////////////////
+			//////////////////////////////////HORIZONTALES
+			
+			linea = new Rect(34,33,40,6,Color.black);
+			g.setColor(linea.c);
+			g.fillRect(linea.x,linea.y,linea.w,linea.h);
+			
+			linea3 = new Rect(34,69,112,6,Color.black);
+			g.setColor(linea3.c);
+			g.fillRect(linea3.x,linea3.y,linea3.w,linea3.h);
+			
+			linea5 = new Rect(105,33,36,6,Color.black);
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea = new Rect(69,104,41,6,Color.black);
+			g.setColor(linea.c);
+			g.fillRect(linea.x,linea.y,linea.w,linea.h);
+			
+			linea4 = new Rect(2,247,34,6,Color.black);
+			g.setColor(linea4.c);
+			g.fillRect(linea4.x,linea4.y,linea4.w,linea4.h);
+			
+			linea5 = new Rect(70,212,41,6,Color.black);//
+			g.setColor(linea5.c);
+			g.fillRect(linea5.x,linea5.y,linea5.w,linea5.h);
+			
+			linea = new Rect(105,318,36,6,Color.black);//
+			g.setColor(linea.c);
+			g.fillRect(linea.x,linea.y,linea.w,linea.h);
+			
+			linea2 = new Rect(34,354,183,6,Color.black);
+			g.setColor(linea2.c);
+			g.fillRect(linea2.x,linea2.y,linea2.w,linea2.h);
+			
+			linea4 = new Rect(2,389,35,6,Color.black);
+			g.setColor(linea4.c);
+			g.fillRect(linea4.x,linea4.y,linea4.w,linea4.h);
+			
+			linea6 = new Rect(34,461,76,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea3 = new Rect(105,390,77,6,Color.black);
+			g.setColor(linea3.c);
+			g.fillRect(linea3.x,linea3.y,linea3.w,linea3.h);
+			
+			linea6 = new Rect(140,461,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea3 = new Rect(140,140,184,6,Color.black);
+			g.setColor(linea3.c);
+			g.fillRect(linea3.x,linea3.y,linea3.w,linea3.h);
+			
+			linea6 = new Rect(140,461,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(34,318,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(140,104,42,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(176,69,77,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(211,104,42,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(176,33,42,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(247,33,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(318,33,77,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(425,33,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(318,69,148,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(282,105,113,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(282,104,113,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(354,140,77,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(176,176,77,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(212,211,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(176,318,76,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(247,354,112,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(390,176,76,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(318,176,39,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(426,319,40,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(322,283,35,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(390,283,35,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(464,212,34,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(247,247,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(248,283,40,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(283,318,41,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(426,426,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(318,390,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(286,426,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(286,426,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(319,460,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(212,461,76,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			linea6 = new Rect(176,426,74,6,Color.black);
+			g.setColor(linea6.c);
+			g.fillRect(linea6.x,linea6.y,linea6.w,linea6.h);
+			
+			
+			fin = new Rect(475,425,74,6,Color.red);
+			g.setColor(fin.c);
+			g.drawString("Fin", fin.x, fin.y);
+			
+			fin2 = new Rect(496,395,6,31,Color.red);
+			g.setColor(fin2.c);
+			g.fillRect(fin2.x,fin2.y,fin2.w,fin2.h);
+			
+			
+		}
+		
+		
+	}
+	
+	public class Rect{
+		
+		int x=0;
+		int y=0;
+		int w=0;
+		int h=0;
+		Color c = Color.black;
+
+		Rect(int x,int y,int w,int h,Color c){
+			this.x=x;
+			this.y=y;
+			this.w=w;
+			this.h=h;
+			this.c=c;
+			
+		}
+
+		public Boolean colision(Rect target) {
+			
+			if(this.x < target.x + target.w && this.x + this.w > target.x  &&
+				this.y < target.y + target.h && this.y + this.h > target.y) 
+			{
+				
+					return true;
+			}
+			return false;
+		}
+	}
+
+}
