@@ -155,7 +155,7 @@ public class Act19 extends JPanel{
 			
 			p3 = new Rect(0,496,500,4,Color.black);//BORDE ABAJO
 			g.setColor(p3.c);
-			g.fillRect(p3.x,p3.y,p3.w,p3.h);
+			g.fillRect(p3.x,p3.y,p3.w,p3.h);//
 			
 			//INTERIOR
 			
